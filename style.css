@@ -1,0 +1,333 @@
+/* start of reset */
+@import url('https://fonts.googleapis.com/css?family=Lekton');
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+    padding-top: 4px;
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* end of reset */
+
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+
+body {
+    background-color: #FFF;
+    cursor: crosshair;
+    font-family: 'Lekton', sans-serif;
+}
+
+/*super tiny screens and base styles */
+input.jscolor { cursor: grab; }
+
+button {
+    font-family: 'Lekton', sans-serif;
+    outline: none;
+    font-size: 0.9em;
+    max-width: 110px;
+    flex: 0 1 auto;
+}
+
+h1 {
+    font-family: 'Lekton', sans-serif;
+    display: inline;
+    font-size: 2em;
+}
+
+div#header { display: none; }
+
+div#container {
+    display: flex;
+    flex-flow: column wrap;
+    width: 99%;
+    border: 1px solid black;
+    margin: 0px auto;
+    padding: 10px 4px;
+}
+
+div.cvs-preview {
+    position: relative;
+    flex: none;
+    margin: 5px;
+    border: 1px solid black;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    user-select: none;
+}
+
+div.cvs-preview, .cvs-scaled:hover {
+    border: 1px solid gold;
+}
+
+div#canvas {
+    flex: 0 1 auto;
+    margin: 4px auto;
+    padding: 5px;
+    height: auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+canvas#editor {
+    margin: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+div.row {
+    display: flex;
+    flex-flow: row wrap; 
+    align-items: center;
+}
+
+div#paletteControls {
+    display: flex;
+    flex: 1;
+    padding: 8px;
+    flex-flow: row nowrap;
+    height: 32px;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    user-select: none;
+}
+
+div#palette {
+    flex: 6;
+    padding: 8px;
+    flex-flow: row wrap;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    user-select: none;
+}
+
+div.chip {
+    flex: 2;
+    width: auto;
+    height: 100%;
+    padding: 2px;
+    border-radius: 6px;
+}
+
+div#savedImages {
+    flex: 0 1 auto;
+    display: none;
+    justify-content: flex-start;
+    align-items: center;
+    flex-flow: row nowrap;
+    overflow-x: scroll;
+    width: 90%;
+    margin: 4px auto;
+}
+
+div#imageTray {
+    display: flex;
+    margin: auto;
+    width: 90%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    padding: 5px;
+    transition: 200ms all ease-in;
+    user-select: none;
+}
+
+div.controls {
+    flex: 0 1 auto;
+    text-align: center;
+    font-size: 0.9em;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+div.control {
+    flex: 0 1 auto;
+    padding: 2px;
+    align-self: center;
+}
+
+div.activeColor {
+    transform: rotate(-90deg) translateX(11px);
+    transition: 200ms all ease-in-out;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+input#swatch {
+    max-width: 52px;
+    padding: 0px;
+    outline: none;
+    font-family: 'Lekton', sans-serif;
+    user-select: none;
+    flex: 0 1 auto;
+}
+
+input#bgColor {
+    width: 50px;
+    padding: 0px;
+    outline: none;
+    font-family: 'Lekton', sans-serif;
+}
+
+select#pxWidth {
+    width: 64px;
+    font-family: 'Lekton', sans-serif;
+    font-size: 0.9em;
+}
+
+div.close {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border: 1px solid saddlebrown;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    padding: 1px;
+    font-family: Arial;
+    font-size: 0.8em;
+    color: #FFF;
+    background-color: rgba(250,33,250, 0.8);
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.24), 0 1px 2px rgba(0,0,0,0.48);
+    z-index: 1;
+}
+
+.close::after {
+    content: 'X';
+}
+
+.cvs-scaled {
+    margin: 8px;
+    border: 1px solid #CCC;
+}
+
+.blit-container:hover {
+    border: 1px solid gold;
+}
+
+#row_0 {
+    order: 0;
+}
+
+#row_1 {
+    order: 1;
+}
+
+#row_2 {
+    order: 2;
+}
+
+#row_3 {
+    order: 4;
+}
+
+#row_4 {
+    order: 1;
+}
+
+
+/* min width 450px */
+@media all and (min-width: 450px) {
+    div#container {
+        /* min-width: 450px; */
+        /* padding: 10px 4px; */
+        /* width: 95%; */
+        /* justify-content: space-around; */
+    } 
+
+    div#header {
+        display: inline;
+        top: -8px;
+        font-size: 0.7em;
+        width: 90px;
+        position: relative;
+        border-bottom: 1px solid tomato;
+        user-select: none;
+    }
+
+    div.controls {
+        padding-left: 10px;
+        flex-flow: row nowrap;
+        align-items: center;
+    }
+}
+
+/* wider screens */
+@media all and (min-width: 700px) {
+    div#header { top: 0px; }
+
+    div#container {
+        margin-left: 5px auto;
+        padding: 4px;
+        width: 680px;
+    }
+
+    div#imageTray {
+        width: 80%;
+        margin: 5px auto;
+    }
+
+    div#palette {
+        justify-content: space-around;
+        flex-flow: row nowrap;
+    }
+
+    div#savedImages {
+        flex: 0 1 140px;
+        flex-flow: column;
+        height: 430px;
+    }
+
+    div#canvas { 
+        flex: 0 2 400px;
+        margin: 20px; 
+    }
+    
+    div.controls {
+        margin: auto;
+    }
+}

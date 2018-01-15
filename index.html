@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"> 
+    <head>
+        <meta charset="utf-8"/>
+        <title>pixl editor</title>
+        <script type="text/javascript" src="./vendor/jscolor.min.js"></script>
+        <script type="text/javascript" src="./vendor/tinycolor-min.js"></script>
+        <script type="text/javascript" src="./pixl.js"></script>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+    </head>
+    <body>
+        <div id="container">
+            <div id="header"><h1>pixl</h1> // <a href="http://github.com/thmsdnnr/pixl">repo</a></div>
+            <div class="row" id="row_0">
+                <div id="paletteControls">
+                   <div class="control"><button id="randomPalette">rando</button></div>
+                   <div class="control"><button id="reset">reset</button></div>
+                   <div class="control"><input class="jscolor" id="swatch"></div>
+                </div>
+               <div id="palette"></div>
+               </div>
+            <div class="row" id="row_1">
+                <div id="savedImages"></div>
+                <div id="canvas"><canvas id="editor"></canvas></div>
+            </div>
+            <div class="row" id="row_2">
+                <div class="controls">
+                <div class="row">
+                    <button id="saveImage">save image</button>
+                    <button id="loadImages">load images</button>
+                </div>
+                <div class="row" id="row_3">
+                    <div class="control"><button id="getImage">get image</button></div><br /> 
+                    <div class="control">transparent<input id="transparent" type="checkbox" checked></div>
+                    <div class="control">bgcolor <input class="jscolor" id="bgColor"></div>
+                    <div class="control">width 
+                        <select id="pxWidth">
+                            <option value="16">16px</option>
+                            <option value="32">32px</option>
+                            <option value="64">64px</option>
+                            <option value="128" selected>128px</option>
+                        </select>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="row_4"><div id="imageTray"></div></div>
+        </div>
+    </body>
+</html>
