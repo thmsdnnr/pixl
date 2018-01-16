@@ -323,8 +323,7 @@ div.close {
     }
 
     div#canvas { 
-        flex: 0 2 400px;
-        margin: 20px; 
+        margin: 20px auto; 
     }
     
     div.controls {
