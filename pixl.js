@@ -175,7 +175,7 @@ function grabCanvas(width, transparent, bgColor, data) {
     let blit=document.createElement('canvas');
     blit.height=width; //px
     blit.width=blit.height;
-    blit.classList.add('c-preview');
+    blit.classList.add('cvs-preview');
     blit.id='cvs_'+cvsID;
     let blitCtx=blit.getContext('2d');
     const cellDim=Math.ceil(width/NUM_COLS);
@@ -208,23 +208,30 @@ function grabCanvas(width, transparent, bgColor, data) {
 }
 
 function getUserImageParameters(e) {
+    cvsID++;
     e.preventDefault();
     let W=document.querySelector('select#pxWidth').value;
     let T=document.querySelector('input#transparent').checked;
     let BG='#'+document.querySelector('input#bgColor').value;
     let tray=document.getElementById('imageTray');
-    const canvas=grabCanvas(W, T, BG, canvasData)
+    let blitContainer=document.createElement('div');
+    blitContainer.id='scaled_image_'+cvsID;
+    blitContainer.classList.add('cvs-scaled');
+    blitContainer.style.height=W+"px";
+    blitContainer.style.width=W+"px";
+    const canvas=grabCanvas(W, T, BG, canvasData)    
     let a = document.createElement('a');
     a.id='a_'+cvsID;
     a.appendChild(canvas);
-    tray.prepend(canvas);
+    blitContainer.appendChild(canvas);
+    tray.prepend(blitContainer);
     tray.scrollLeft=0;
 }
 
 function handleSavedImageClick(e) {
-    if (!e.target.classList.contains('c-preview')) { return false; }
+    if (!e.target.classList.contains('cvs-preview')) { return false; }
     const canvasID='cvs_'+e.target.id.split('_')[1];
-    let name=window.prompt('enter a save name');
+    let name=window.prompt('Enter a file name for the PNG.');
     if (!name) { return false; }
     var saveCanvas=document.getElementById(canvasID);
     var link = document.createElement('a');
@@ -302,7 +309,7 @@ function saveImage(e) {
 }
 
 function handleSavedPaneClick(e) {
-    if (e.target.classList.contains('c-preview')) { selectImage(e); }
+    if (e.target.classList.contains('cvs-preview')) { selectImage(e); }
     if (e.target.classList.contains('close')) {
         let imgIdx=Number(e.target.id.split("_")[1]);
         deleteImageByIdx(imgIdx);
@@ -337,16 +344,20 @@ function deleteImageByIdx(imgIdx) {
 function loadImages(e) {
     let sI=document.getElementById('savedImages');
     let saved=localStorage.getItem('pixl');
-    if (!saved) { 
+    if (!saved) { return false; }
+    saved=JSON.parse(saved);
+    if (!saved.images.length) { 
         sI.style.display='none';
         return false; 
     }
-    loadedImages=JSON.parse(saved);
     sI.innerHTML='';
-    loadedImages.images.map((img,idx)=>{
+    saved.images.map((img,idx)=>{
         let blitContainer=document.createElement('div');
         blitContainer.id='container_close_'+idx;
-        blitContainer.classList.add('blit-container');
+        blitContainer.classList.add('cvs-preview');
+        blitContainer.style.height=Math.round(PREVIEW_IMAGE_SCALE*128)+5+"px";
+        blitContainer.style.width=Math.round(PREVIEW_IMAGE_SCALE*128)+5+"px";
+        console.log(blitContainer.style.height);
         let closeBox=document.createElement('div');
         closeBox.id='close_'+idx;
         closeBox.classList.add('close');
