@@ -1,3 +1,4 @@
+/* start of reset */
 @import url('https://fonts.googleapis.com/css?family=Lekton');
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -49,6 +50,10 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+/* end of reset */
+
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
 
 body {
     background-color: #FFF;
@@ -56,43 +61,45 @@ body {
     font-family: 'Lekton', sans-serif;
 }
 
+/*super tiny screens and base styles */
+input.jscolor { cursor: grab; }
+
 button {
     font-family: 'Lekton', sans-serif;
-    font-size: 0.9em;
     outline: none;
+    font-size: 0.9em;
     max-width: 110px;
     flex: 0 1 auto;
 }
 
 h1 {
     font-family: 'Lekton', sans-serif;
-    font-size: 2em;
     display: inline;
+    font-size: 2em;
 }
 
-div#header {
-    top: -8px;
-    font-size: 0.7em;
-    width: 90px;
+div#header { display: none; }
+
+div#container {
+    display: flex;
+    flex-flow: column wrap;
+    width: 99%;
+    border: 1px solid black;
+    margin: 0px auto;
+    padding: 10px 4px;
+}
+
+div.cvs-preview {
     position: relative;
-    border-bottom: 1px solid tomato;
+    flex: none;
+    margin: 5px;
+    border: 1px solid black;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     user-select: none;
 }
 
-input.jscolor {
-    cursor: grab;
-}
-
-div#container {
-    min-width: 500px;
-    padding: 10px 4px;
-    margin: 0px auto;
-    border: 1px solid black;
-    width: 95%;
-    min-width: 442px;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-around
+div.cvs-preview, .cvs-scaled:hover {
+    border: 1px solid gold;
 }
 
 div#canvas {
@@ -108,69 +115,71 @@ canvas#editor {
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-p {
-    display: block;
-}
-
 div.row {
     display: flex;
     flex-flow: row wrap; 
     align-items: center;
 }
 
-div.row-auto {
-    width: 100%;
-    margin: auto;
-}
-
 div#paletteControls {
-    flex: 0 1 auto;
-    padding: 8px;
-    margin: auto;
-    width: auto;
-    flex-flow: row nowrap;
-    height: 24px;
     display: flex;
-    justify-content: flex-end;
-    background-color: white;
-    align-items: center;
+    flex: 1;
+    padding: 8px;
+    flex-flow: row nowrap;
+    height: 32px;
+    justify-content: center;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     user-select: none;
 }
 
 div#palette {
-    flex: 0 1 auto;
+    flex: 6;
     padding: 8px;
-    margin: auto;
     flex-flow: row wrap;
-    height: 24px;
+    height: 32px;
     display: flex;
-    justify-content: flex-end;
-    background-color: white;
     align-items: center;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     user-select: none;
 }
 
+div.chip {
+    flex: 2;
+    width: auto;
+    height: 100%;
+    padding: 2px;
+    border-radius: 6px;
+}
+
 div#savedImages {
     flex: 0 1 auto;
-    margin: auto;
     display: none;
     justify-content: flex-start;
+    align-items: center;
     flex-flow: row nowrap;
-    overflow-y: scroll;
+    overflow-x: scroll;
     width: 90%;
+    margin: 4px auto;
+}
+
+div#imageTray {
+    display: flex;
+    margin: auto;
+    width: 90%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    padding: 5px;
+    transition: 200ms all ease-in;
+    user-select: none;
 }
 
 div.controls {
     flex: 0 1 auto;
-    width: 540px;
     text-align: center;
-    margin: 2px auto;
     font-size: 0.9em;
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
+    flex-flow: row nowrap;
+    justify-content: center;
     align-items: center;
     user-select: none;
 }
@@ -181,29 +190,8 @@ div.control {
     align-self: center;
 }
 
-div#imageTray {
-    margin: auto;
-    width: 90%;
-    white-space: nowrap;
-    overflow-x: scroll;
-    padding: 5px;
-    transition: 200ms all ease-in;
-    user-select: none;
-}
-/* 
-flex-flow: row nowrap;
-overflow-y: scroll;
-width: 90%; */
-
-div.chip {
-    flex: none;
-    width: 30px;
-    height: 15px;
-    border-radius: 6px;
-}
-
-.activeColor {
-    transform: rotate(-90deg) translateX(1px) translateY(-1px) scale(1.2);
+div.activeColor {
+    transform: rotate(-90deg) translateX(11px);
     transition: 200ms all ease-in-out;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
@@ -230,148 +218,75 @@ select#pxWidth {
     font-size: 0.9em;
 }
 
-.c-preview {
-    flex: none;
-    margin: 5px;
-    border: 1px solid black;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    user-select: none;
-}
-
-.c-output {
-    flex: none;
-    margin: 5px;
-    border: 1px solid black;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    user-select: none;
-}
-
-.close {
+div.close {
     position: absolute;
     top: 0px;
     left: 0px;
     border: 1px solid saddlebrown;
     border-radius: 50%;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     padding: 1px;
     font-family: Arial;
-    font-size: 14px;
+    font-size: 0.8em;
     color: #FFF;
     background-color: rgba(250,33,250, 0.8);
     text-align: center;
     box-shadow: 0 1px 3px rgba(0,0,0,0.24), 0 1px 2px rgba(0,0,0,0.48);
+    z-index: 1;
 }
 
 .close::after {
     content: 'X';
 }
 
-.blit-container {
-    position: relative;
-    width: auto;
-    height: auto;
+.cvs-scaled {
     margin: 8px;
+    border: 1px solid #CCC;
 }
 
-.c-preview:hover {
+.blit-container:hover {
     border: 1px solid gold;
 }
 
-/*wider screens */
-@media all and (min-width: 700px) {
-    div#header {
-        top: 0px;
-    }
-
-    div#container {
-        margin-left: 5px auto;
-        padding: 4px;
-        width: 680px;
-    }
-
-    div.controls {
-        width: 100%;
-    }
-
-    div#imageTray {
-        width: 80%;
-        margin: 5px auto;
-    }
-
-    div.row {
-        align-items: flex-start;
-        flex-flow: row nowrap;
-    }
-
-    div#palette {
-        justify-content: space-around;
-        flex-flow: row nowrap;
-        height: 24px;
-    }
-
-    div.chip {
-        flex: none;
-        width: 36px;
-        height: 18px;
-        border-radius: 6px;
-    }
-
-    div#savedImages {
-        height: 400px;
-        width: 200px;
-        justify-content: flex-end;
-        flex-flow: row wrap;
-        user-select: none;
-    }
-
-    div#canvas {
-        margin: 10px auto;
-    }
+#row_0 {
+    order: 0;
 }
 
-/*super tiny screens*/
-@media (max-width: 450px) {
-    div#palette, div#paletteControls, div#imageTray, div#savedImages, div#canvas, div.controls, div.control, {
-        justify-content: flex-start;
-    }
+#row_1 {
+    order: 1;
+}
+
+#row_2 {
+    order: 2;
+}
+
+#row_3 {
+    order: 4;
+}
+
+#row_4 {
+    order: 1;
+}
+
+
+/* min width 450px */
+@media all and (min-width: 450px) {
+    div#container {
+        /* min-width: 450px; */
+        /* padding: 10px 4px; */
+        /* width: 95%; */
+        /* justify-content: space-around; */
+    } 
 
     div#header {
-        display: none;
-    }
-
-    #row_0 {
-        order:0;
-    }
-
-    #row_1 {
-        order: 1;
-    }
-
-    #row_2 {
-        order: 2;
-    }
-
-    #row_3 {
-        order:4;
-    }
-
-    #row_4 {
-        order:1;
-    }
-
-    div#palette {
-        margin-top: 4px;
-    }
-
-    div.row {
-        width: auto;
-        flex-flow: row wrap;
-        margin: 0px;
-    }
-
-    div.row-auto {
-        margin: 0px;
+        display: inline;
+        top: -8px;
+        font-size: 0.7em;
+        width: 90px;
+        position: relative;
+        border-bottom: 1px solid tomato;
+        user-select: none;
     }
 
     div.controls {
@@ -379,24 +294,39 @@ select#pxWidth {
         flex-flow: row nowrap;
         align-items: center;
     }
+}
 
-    div.control {
-        margin: 0px 2px;
-    }
-
-    div.chip {
-        width: 10px;
-        height: 24px;
-        padding: 2px;
-    }
+/* wider screens */
+@media all and (min-width: 700px) {
+    div#header { top: 0px; }
 
     div#container {
-        min-width: 0px;
-        width: 388px;
-        margin: 0px;
+        margin-left: 5px auto;
+        padding: 4px;
+        width: 680px;
     }
 
-    .activeColor {
-        transform: rotate(-90deg) translateX(14px) translateY(5px);
+    div#imageTray {
+        width: 80%;
+        margin: 5px auto;
+    }
+
+    div#palette {
+        justify-content: space-around;
+        flex-flow: row nowrap;
+    }
+
+    div#savedImages {
+        flex: 0 1 140px;
+        flex-flow: column;
+        height: 430px;
+    }
+
+    div#canvas { 
+        margin: 20px auto; 
+    }
+    
+    div.controls {
+        margin: auto;
     }
 }
