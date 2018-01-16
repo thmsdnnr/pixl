@@ -98,7 +98,7 @@ div.cvs-preview {
     user-select: none;
 }
 
-div.cvs-preview, .cvs-scaled:hover {
+div.cvs-preview:hover, .cvs-scaled:hover {
     border: 1px solid gold;
 }
 
