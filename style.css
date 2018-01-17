@@ -61,11 +61,14 @@ body {
     font-family: 'Lekton', sans-serif;
 }
 
+body, h1, input, button, select {
+    font-family: 'Lekton', sans-serif;
+}
+
 /*super tiny screens and base styles */
 input.jscolor { cursor: grab; }
 
 button {
-    font-family: 'Lekton', sans-serif;
     outline: none;
     font-size: 0.9em;
     max-width: 110px;
@@ -73,7 +76,6 @@ button {
 }
 
 h1 {
-    font-family: 'Lekton', sans-serif;
     display: inline;
     font-size: 2em;
 }
@@ -84,6 +86,7 @@ div#container {
     display: flex;
     flex-flow: column wrap;
     width: 99%;
+    max-width: 680px;
     border: 1px solid black;
     margin: 0px auto;
     padding: 10px 4px;
@@ -98,7 +101,7 @@ div.cvs-preview {
     user-select: none;
 }
 
-div.cvs-preview:hover, .cvs-scaled:hover {
+div.cvs-preview:hover {
     border: 1px solid gold;
 }
 
@@ -132,10 +135,16 @@ div#paletteControls {
     user-select: none;
 }
 
+div.control {
+    flex: 0 1 auto;
+    padding: 2px;
+    align-self: center;
+}
+
 div#palette {
     flex: 6;
     padding: 8px;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     height: 32px;
     display: flex;
     align-items: center;
@@ -175,6 +184,7 @@ div#imageTray {
 
 div.controls {
     flex: 0 1 auto;
+    margin: auto;
     text-align: center;
     font-size: 0.9em;
     display: flex;
@@ -182,12 +192,6 @@ div.controls {
     justify-content: center;
     align-items: center;
     user-select: none;
-}
-
-div.control {
-    flex: 0 1 auto;
-    padding: 2px;
-    align-self: center;
 }
 
 div.activeColor {
@@ -198,23 +202,18 @@ div.activeColor {
 
 input#swatch {
     max-width: 52px;
-    padding: 0px;
     outline: none;
-    font-family: 'Lekton', sans-serif;
     user-select: none;
     flex: 0 1 auto;
 }
 
 input#bgColor {
     width: 50px;
-    padding: 0px;
     outline: none;
-    font-family: 'Lekton', sans-serif;
 }
 
 select#pxWidth {
     width: 64px;
-    font-family: 'Lekton', sans-serif;
     font-size: 0.9em;
 }
 
@@ -240,93 +239,28 @@ div.close {
     content: 'X';
 }
 
-.cvs-scaled {
-    margin: 8px;
-    border: 1px solid #CCC;
-}
-
-.blit-container:hover {
-    border: 1px solid gold;
-}
-
-#row_0 {
-    order: 0;
-}
-
-#row_1 {
-    order: 1;
-}
-
-#row_2 {
-    order: 2;
-}
-
-#row_3 {
-    order: 4;
-}
-
-#row_4 {
-    order: 1;
-}
-
+#row_3 { order: 0; }
+#row_2 { order: 1; }
 
 /* min width 450px */
 @media all and (min-width: 450px) {
-    div#container {
-        /* min-width: 450px; */
-        /* padding: 10px 4px; */
-        /* width: 95%; */
-        /* justify-content: space-around; */
-    } 
-
     div#header {
-        display: inline;
-        top: -8px;
+        display: block;
         font-size: 0.7em;
         width: 90px;
-        position: relative;
         border-bottom: 1px solid tomato;
         user-select: none;
-    }
-
-    div.controls {
-        padding-left: 10px;
-        flex-flow: row nowrap;
-        align-items: center;
     }
 }
 
 /* wider screens */
 @media all and (min-width: 700px) {
-    div#header { top: 0px; }
-
-    div#container {
-        margin-left: 5px auto;
-        padding: 4px;
-        width: 680px;
-    }
-
-    div#imageTray {
-        width: 80%;
-        margin: 5px auto;
-    }
-
-    div#palette {
-        justify-content: space-around;
-        flex-flow: row nowrap;
-    }
+    #row_2 { order: 0; }
+    #row_3 { order: 1; }
 
     div#savedImages {
         flex: 0 1 140px;
         flex-flow: column;
         height: 430px;
-    }
-
-    div#canvas { 
-        margin: 20px auto; 
-    }
-    
-    div.controls {
-        margin: auto;
     }
 }

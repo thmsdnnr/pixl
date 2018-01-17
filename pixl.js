@@ -173,7 +173,7 @@ function changeColorSwatch(e) {
 function grabCanvas(width, transparent, bgColor, data) {
     cvsID++;
     let blit=document.createElement('canvas');
-    blit.height=width; //px
+    blit.height=width;
     blit.width=blit.height;
     blit.classList.add('cvs-preview');
     blit.id='cvs_'+cvsID;
@@ -216,9 +216,9 @@ function getUserImageParameters(e) {
     let tray=document.getElementById('imageTray');
     let blitContainer=document.createElement('div');
     blitContainer.id='scaled_image_'+cvsID;
-    blitContainer.classList.add('cvs-scaled');
-    blitContainer.style.height=W+"px";
-    blitContainer.style.width=W+"px";
+    blitContainer.classList.add('cvs-preview');
+    blitContainer.style.height=Number(W)+2+"px";
+    blitContainer.style.width=Number(W)+2+"px";
     const canvas=grabCanvas(W, T, BG, canvasData)    
     let a = document.createElement('a');
     a.id='a_'+cvsID;
@@ -357,7 +357,6 @@ function loadImages(e) {
         blitContainer.classList.add('cvs-preview');
         blitContainer.style.height=Math.round(PREVIEW_IMAGE_SCALE*128)+5+"px";
         blitContainer.style.width=Math.round(PREVIEW_IMAGE_SCALE*128)+5+"px";
-        console.log(blitContainer.style.height);
         let closeBox=document.createElement('div');
         closeBox.id='close_'+idx;
         closeBox.classList.add('close');
@@ -425,7 +424,8 @@ function redrawAtScale(n) { //scales components of screen to factor N and redraw
     HEIGHT=n*HEIGHT_BASIS;
     PREVIEW_IMAGE_SCALE=n;
     getCanvasAndContext();
-    loadImages();
+    let sI=document.getElementById('savedImages');
+    if (sI.style.display!=='none') { loadImages(); }
     forceRedraw();
 }
 
@@ -439,7 +439,7 @@ window.onload = function() {
         if (!isLargeScreen) { //transition to small screen
             redrawAtScale(0.8);  
         } else { //transition to large screen
-        redrawAtScale(1);
+            redrawAtScale(1);
         }
     } 
     bigWindow.addListener(handleOrientationChange); // Add the callback function as a listener to the query list.
