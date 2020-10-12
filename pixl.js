@@ -11,10 +11,10 @@ let isLargeScreen=null;
 let mini;
 let miniC;
 //-> WIDTH and HEIGHT have to be even multiple of NUM_ROWS & NUM_COLS
-let WIDTH = 400;
-let WIDTH_BASIS = 400; //px
-let HEIGHT_BASIS = 400;
-let HEIGHT = 400; //px
+let WIDTH = 1000;
+let WIDTH_BASIS = 1000; //px
+let HEIGHT_BASIS = 1000;
+let HEIGHT = 1000; //px
 let PREVIEW_IMAGE_BASE = 128; //px
 let PREVIEW_IMAGE_SCALE = 0.25;
 // -> NUM_ROWS & NUM_COLS have to be even multiple of 16
